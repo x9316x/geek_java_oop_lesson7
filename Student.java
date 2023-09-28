@@ -1,6 +1,7 @@
 package geek_java_oop_lesson7;
 
-public class Student implements Observer{
+// Класс представляющий студента и его реакцию на вакансии
+public class Student implements Observer {
 
     private String name;
     private int salary = 2000;
@@ -10,15 +11,15 @@ public class Student implements Observer{
     }
 
     @Override
-    public void receiveOffer(String nameCompany, int salary) {
-        if (this.salary <= salary){
-            System.out.printf("Студент %s: Мне нужна эта работа! (компания: %s; заработная плата: %d)\n",
-                    name, nameCompany, salary);
-            this.salary = salary;
-        }
-        else {
-            System.out.printf("Студент %s: Я найду работу получше! (компания: %s; заработная плата: %d)\n",
-                    name, nameCompany, salary);
+    public void receiveOffer(Vacancy vacancy) {
+        if ((vacancy.getVacancyType() == VacancyType.INTERN || vacancy.getVacancyType() == VacancyType.DEVELOPER)
+                && this.salary <= vacancy.getSalary()){
+            System.out.printf("Студент %s: Мне подходит это предложение! (позиция: %s; компания: %s; зарплата: %d)\n",
+                    name, vacancy.getPosition(), vacancy.getDescription(), vacancy.getSalary());
+            this.salary = vacancy.getSalary();
+        } else {
+            System.out.printf("Студент %s: Я буду искать дальше! (позиция: %s; компания: %s; зарплата: %d)\n",
+                    name, vacancy.getPosition(), vacancy.getDescription(), vacancy.getSalary());
         }
     }
 }

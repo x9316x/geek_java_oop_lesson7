@@ -17,8 +17,12 @@ public class Company {
 
     public void needEmployee(){
         int salary = random.nextInt(maxSalary);
-        jobAgency.sendOffer(name, salary);
+
+        // Создаем объект вакансии с необходимыми данными
+        // Используем имя компании как описание и стандартное значение для позиции
+        Vacancy vacancy = new Vacancy("Разработчик", name, salary, VacancyType.DEVELOPER);
+
+        // Отправляем объект вакансии
+        jobAgency.sendOffer(vacancy);
     }
-
-
 }

@@ -1,5 +1,6 @@
 package geek_java_oop_lesson7;
 
+// Класс представляющий специалиста (мастера) и его реакцию на вакансии
 public class Master implements Observer {
 
     private String name;
@@ -10,15 +11,15 @@ public class Master implements Observer {
     }
 
     @Override
-    public void receiveOffer(String nameCompany, int salary) {
-        if (this.salary <= salary){
-            System.out.printf("Специалист %s: Мне нужна эта работа! (компания: %s; заработная плата: %d)\n",
-                    name, nameCompany, salary);
-            this.salary = salary;
-        }
-        else {
-            System.out.printf("Специалист %s: Я найду работу получше! (компания: %s; заработная плата: %d)\n",
-                    name, nameCompany, salary);
+    public void receiveOffer(Vacancy vacancy) {
+        if ((vacancy.getVacancyType() == VacancyType.DEVELOPER || vacancy.getVacancyType() == VacancyType.MANAGER)
+                && this.salary <= vacancy.getSalary()){
+            System.out.printf("Мастер %s: Мне подходит это предложение! (позиция: %s; компания: %s; зарплата: %d)\n",
+                    name, vacancy.getPosition(), vacancy.getDescription(), vacancy.getSalary());
+            this.salary = vacancy.getSalary();
+        } else {
+            System.out.printf("Мастер %s: Я найду что-то лучше! (позиция: %s; компания: %s; зарплата: %d)\n",
+                    name, vacancy.getPosition(), vacancy.getDescription(), vacancy.getSalary());
         }
     }
 }

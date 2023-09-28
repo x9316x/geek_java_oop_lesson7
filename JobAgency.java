@@ -1,5 +1,6 @@
 package geek_java_oop_lesson7;
 
+// Класс представляющий агентство по трудоустройству
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,9 +9,9 @@ public class JobAgency implements Publisher {
     List<Observer> observers = new ArrayList<>();
 
     @Override
-    public void sendOffer(String companyName, int salary) {
-        for (Observer observer : observers){
-            observer.receiveOffer(companyName, salary);
+    public void sendOffer(Vacancy vacancy) {
+        for (Observer observer : observers) {
+            observer.receiveOffer(vacancy);
         }
     }
 
